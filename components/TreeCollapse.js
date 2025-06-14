@@ -15,7 +15,7 @@ export const treeCollapse = {
           {{ item.title }}
         </h5>
 
-        <ul v-if="parent[index]" class="ps-3">
+        <ul v-if="parentItem[index]" class="ps-3">
           <li 
             v-for="(child, i) in item.children" 
             :key="i" 
@@ -25,7 +25,7 @@ export const treeCollapse = {
           >
             {{ child.title }}
 
-            <ul v-if="childItems[\`\${index}-\${i}\`]" class="ps-3">
+            <ul v-if="chidItem[\`\${index}-\${i}\`]" class="ps-3">
               <li 
                 v-for="(sub, j) in child.children" 
                 :key="j" 
@@ -69,22 +69,22 @@ export const treeCollapse = {
       }
     ])
 
-    const parent = ref({})
-    const childItems = ref({})
+    const parentItem = ref({})
+    const chidItem = ref({})
 
     const toggleParent = index => {
-      parent.value[index] = !parent.value[index]
+      parentItem.value[index] = !parentItem.value[index]
     }
 
     const toggleChild = (parentIndex, childIndex) => {
       const key = `${parentIndex}-${childIndex}`
-      childItems.value[key] = !childItems.value[key]
+      chidItem.value[key] = !chidItem.value[key]
     }
 
     return {
       treeData,
-      parent,
-      childItems,
+      parentItem,
+      chidItem,
       toggleParent,
       toggleChild
     }
